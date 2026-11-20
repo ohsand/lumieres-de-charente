@@ -1,0 +1,32 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { t, type Lang } from '../../../i18n/ui';
+import { getPosts, langPaths } from '../../../lib/site';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+const posts = getPosts(lang);
+const BATCH = 5;
+---
+<Base lang={lang} title={s.blog_title} description={s.blog_intro} path="blog">
+  <section class="page-head"><div class="wrap">
+    <span class="kicker">{s.nav_blog}</span><h1>{s.blog_title}</h1>
+    <p class="lead" style="max-width:60ch">{s.blog_intro}</p>
+  </div></section>
+  <section style="padding:1rem 0 6rem"><div class="wrap">
+    <div class="posts" id="posts">{posts.map((p, i) => <PostCard lang={lang} p={p} hidden={i >= BATCH} />)}</div>
+    <p id="more" style="text-align:center;color:var(--muted);margin-top:2rem" hidden={posts.length <= BATCH}>{s.loading}</p>
+  </div></section>
+  <script>
+    // Endless scroll: reveal the next posts as the reader reaches the bottom
+    const more = document.getElementById('more')!;
+    const io = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      const hidden = [...document.querySelectorAll<HTMLElement>('#posts > [hidden]')].slice(0, 5);
+      hidden.forEach((el) => (el.hidden = false));
+      if (!document.querySelector('#posts > [hidden]')) { more.hidden = true; io.disconnect(); }
+    }, { rootMargin: '400px' });
+    if (!more.hidden) io.observe(more);
+  </script>
+</Base>

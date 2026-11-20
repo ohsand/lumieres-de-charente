@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, type Lang } from '../../i18n/ui';
+import { gites, settings, langPaths } from '../../lib/site';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+const d = 0.03;
+const bbox = [settings.lon - d * 1.6, settings.lat - d, settings.lon + d * 1.6, settings.lat + d].join('%2C');
+---
+<Base lang={lang} title={s.contact_title} description={s.contact_intro} path="contact">
+  <section class="page-head"><div class="wrap">
+    <span class="kicker">{s.nav_prices_contact}</span>
+    <h1>{s.contact_title}</h1>
+    <p class="lead" style="max-width:62ch">{s.contact_intro}</p>
+  </div></section>
+  <section style="padding-bottom:5rem"><div class="wrap split" style="align-items:start">
+    <form class="form" id="enquiry" data-email={settings.email} data-subject={`${s.enquire} – Lumières de Charente`}>
+      <div><label for="f-name">{s.f_name}</label><input id="f-name" name={s.f_name} required autocomplete="name" /></div>
+      <div><label for="f-email">{s.f_email}</label><input id="f-email" name={s.f_email} type="email" required autocomplete="email" /></div>
+      <div><label for="f-phone">{s.f_phone}</label><input id="f-phone" name={s.f_phone} type="tel" autocomplete="tel" /></div>
+      <div><label for="f-gite">{s.f_gite}</label>
+        <select id="f-gite" name={s.f_gite}>
+          <option value={s.f_any}>{s.f_any}</option>
+          {gites.map((g) => <option value={`Gîte ${g.name}`} data-slug={g.slug}>Gîte {g.name} ({s.sleeps} {g.sleeps})</option>)}
+          <option value={s.whole_domaine}>{s.whole_domaine}</option>
+        </select></div>
+      <div><label for="f-arr">{s.f_arrival}</label><input id="f-arr" name={s.f_arrival} type="date" /></div>
+      <div><label for="f-dep">{s.f_departure}</label><input id="f-dep" name={s.f_departure} type="date" /></div>
+      <div><label for="f-ad">{s.f_adults}</label><input id="f-ad" name={s.f_adults} type="number" min="1" max="27" value="2" /></div>
+      <div><label for="f-ch">{s.f_children}</label><input id="f-ch" name={s.f_children} type="number" min="0" max="20" value="0" /></div>
+      <div class="full"><label for="f-msg">{s.f_message}</label><textarea id="f-msg" name={s.f_message}></textarea></div>
+      <div class="full"><button class="btn" type="submit">{s.f_send}</button><p style="font-size:.9rem;color:var(--muted);margin-top:.8rem">{s.f_note}</p></div>
+    </form>
+    <aside>
+      <dl class="contact-box">
+        <dt>{s.email}</dt><dd><a href={`mailto:${settings.email}`}>{settings.email}</a></dd>
+        {settings.phone && <><dt>{s.phone}</dt><dd><a href={`tel:${settings.phone.replace(/\s/g, '')}`}>{settings.phone}</a></dd></>}
+        <dt>{s.address}</dt><dd>{settings.address}</dd>
+      </dl>
+      <iframe class="map" style="margin-top:1.5rem" loading="lazy" title="Map"
+        src={`https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${settings.lat}%2C${settings.lon}`}></iframe>
+    </aside>
+  </div></section>
+  <script>
+    const f = document.getElementById('enquiry') as HTMLFormElement;
+    const want = new URLSearchParams(location.search).get('gite');
+    if (want) { const o = f.querySelector<HTMLOptionElement>(`option[data-slug="${want}"]`); if (o) o.selected = true; }
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const lines = [...new FormData(f).entries()].map(([k, v]) => `${k}: ${v}`);
+      location.href = `mailto:${f.dataset.email}?subject=${encodeURIComponent(f.dataset.subject!)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    });
+  </script>
+</Base>

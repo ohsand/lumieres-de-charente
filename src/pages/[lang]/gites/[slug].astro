@@ -1,0 +1,82 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GiteCard from '../../../components/GiteCard.astro';
+import { t, langs, languages, type Lang } from '../../../i18n/ui';
+import { gites, img, url, money, getGiteText, youtubeId } from '../../../lib/site';
+export function getStaticPaths() {
+  return langs.flatMap((lang) => gites.map((g) => ({ params: { lang, slug: g.slug } })));
+}
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+const g = gites.find((x) => x.slug === Astro.params.slug)!;
+const text = getGiteText(lang, g.slug);
+const fm = text.frontmatter;
+const from = Math.min(...Object.values(g.rates));
+const yt = youtubeId(g.video);
+const others = gites.filter((x) => x.slug !== g.slug);
+---
+<Base lang={lang} title={`Gîte ${g.name}`} description={fm.tagline} path={`gites/${g.slug}`} image={g.image}>
+  <section class="page-hero" style="min-height:62vh">
+    <img class="photo" src={img(g.image, 2000)} alt={`Gîte ${g.name}`} />
+    <div class="wrap inner"><span class="kicker" style="color:#f3dcb4">{s.nav_gites}</span><h1>Gîte {g.name}</h1><p style="font-size:1.25rem;max-width:40ch">{fm.tagline}</p></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split" style="align-items:start">
+      <div class="prose">
+        <text.Content />
+      </div>
+      <aside>
+        <h3>{s.at_a_glance}</h3>
+        <div class="facts">
+          <div><b>{g.sleeps}</b><span>{s.sleeps}</span></div>
+          <div><b>{g.bedrooms}</b><span>{s.bedrooms}</span></div>
+          <div><b>{g.bathrooms}</b><span>{s.bathrooms}</span></div>
+        </div>
+        {fm.features && <ul class="prose" style="padding-left:1.2rem">{fm.features.map((f: string) => <li>{f}</li>)}</ul>}
+        <p style="font-size:1.1rem"><strong>{s.from} {money(from, languages[lang].locale)}</strong> {s.per_week}</p>
+        <p><a class="btn" href={url(lang, 'contact') + `?gite=${g.slug}`}>{s.check_availability}</a> <a class="btn ghost" href={url(lang, 'prices')}>{s.nav_prices}</a></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>{s.gallery}</h2>
+      <div class="gallery">
+        {g.gallery.map((p, i) => <button type="button" data-full={img(p, 2000)}><img class="photo" src={img(p, i === 0 ? 1400 : 700)} alt={`Gîte ${g.name} – ${i + 1}`} loading="lazy" /></button>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="narrow">
+      <h2>{s.video}</h2>
+      <div class="video" data-yt={yt}>
+        {yt ? <button class="btn light" type="button">▶ {s.play_video}</button> : <p style="margin:0;max-width:36ch">{s.video_soon}</p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>{s.other_gites}</h2>
+      <div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))">{others.map((o) => <GiteCard lang={lang} g={o} />)}</div>
+    </div>
+  </section>
+
+  <dialog class="lightbox"><form method="dialog"><button>✕ {s.close}</button></form><img alt="" /></dialog>
+  <script>
+    const dlg = document.querySelector<HTMLDialogElement>('dialog.lightbox')!;
+    document.querySelectorAll<HTMLButtonElement>('.gallery button').forEach((b) =>
+      b.addEventListener('click', () => { dlg.querySelector('img')!.src = b.dataset.full!; dlg.showModal(); }));
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    // Privacy-friendly video: YouTube only loads after the visitor presses play
+    document.querySelectorAll<HTMLElement>('.video[data-yt]').forEach((v) => {
+      const id = v.dataset.yt; const btn = v.querySelector('button');
+      if (id && btn) btn.addEventListener('click', () => {
+        v.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen title="Video"></iframe>`;
+      });
+    });
+  </script>
+</Base>

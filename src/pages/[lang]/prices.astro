@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, languages, type Lang } from '../../i18n/ui';
+import { gites, prices, url, money, getPage, getGiteText, langPaths } from '../../lib/site';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+const loc = languages[lang].locale;
+const page = getPage(lang, 'prices');
+const label = (id: string) => (s as any)[`season_${id}`];
+---
+<Base lang={lang} title={s.prices_title} description={s.prices_intro} path="prices">
+  <section class="page-head"><div class="wrap">
+    <span class="kicker">{s.nav_prices_contact}</span>
+    <h1>{s.prices_title} {prices.year}</h1>
+    <p class="lead" style="max-width:62ch">{s.prices_intro}</p>
+  </div></section>
+  <section style="padding-bottom:3rem"><div class="wrap">
+    <div class="table-wrap">
+      <table class="rates">
+        <thead><tr><th>{s.gite}</th>{prices.seasons.map((x) => <th>{label(x.id)}<small>{x.dates}</small></th>)}</tr></thead>
+        <tbody>
+          {gites.map((g) => (
+            <tr>
+              <th><a href={url(lang, `gites/${g.slug}`)}>{g.name}</a><small>{s.sleeps} {g.sleeps} · {getGiteText(lang, g.slug).frontmatter.tagline}</small></th>
+              {prices.seasons.map((x) => <td>{money((g.rates as any)[x.id], loc)}</td>)}
+            </tr>
+          ))}
+          <tr><th>{s.whole_domaine}</th>{prices.seasons.map(() => <td><em>{s.on_request}</em></td>)}</tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.9rem;color:var(--muted);margin-top:.6rem">{s.per_week} · EUR</p>
+  </div></section>
+  <section class="section alt"><div class="narrow prose"><page.Content />
+    <p style="margin-top:2rem"><a class="btn" href={url(lang, 'contact')}>{s.check_availability}</a></p>
+  </div></section>
+</Base>

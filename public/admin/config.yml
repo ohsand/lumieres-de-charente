@@ -1,0 +1,128 @@
+# Decap CMS – the owners' editing screen at /admin/
+# Login: GitHub OAuth App + Vercel env vars OAUTH_GITHUB_CLIENT_ID / OAUTH_GITHUB_CLIENT_SECRET (see README).
+backend:
+  name: github
+  repo: ohsand/lumieres-de-charente
+  branch: main
+  base_url: https://lumieres-de-charente.vercel.app   # login runs on this site (api/auth.js + api/callback.js)
+  auth_endpoint: api/auth
+media_folder: public/images/uploads
+public_folder: /images/uploads
+locale: en
+i18n:
+  structure: multiple_folders
+  locales: [en, fr, nl, de, zh]
+  default_locale: en
+
+collections:
+  - name: settings
+    label: "⚙︎ Settings (season, contact)"
+    files:
+      - name: settings
+        label: Site settings
+        file: src/data/settings.json
+        fields:
+          - { name: siteName, label: Site name, widget: string }
+          - { name: season, label: "Season look (auto = winter from October to March)", widget: select, options: [auto, summer, winter] }
+          - { name: heroSummer, label: Home photo – summer, widget: image }
+          - { name: heroWinter, label: Home photo – winter, widget: image }
+          - { name: email, label: Email, widget: string }
+          - { name: phone, label: Telephone, widget: string, required: false }
+          - { name: whatsapp, label: WhatsApp, widget: string, required: false }
+          - { name: address, label: Address, widget: string }
+          - { name: lat, label: Map latitude, widget: number, value_type: float }
+          - { name: lon, label: Map longitude, widget: number, value_type: float }
+          - { name: facebook, label: Facebook URL, widget: string, required: false }
+          - { name: instagram, label: Instagram URL, widget: string, required: false }
+          - { name: youtube, label: YouTube URL, widget: string, required: false }
+      - name: prices
+        label: Seasons & dates
+        file: src/data/prices.json
+        fields:
+          - { name: year, label: Year, widget: number }
+          - name: seasons
+            label: Seasons
+            widget: list
+            allow_add: false
+            fields:
+              - { name: id, label: "Season (winter / low / mid / high)", widget: string }
+              - { name: dates, label: Dates, widget: string }
+      - name: gites
+        label: "Gîtes – photos, beds & weekly prices"
+        file: src/data/gites.json
+        fields:
+          - name: gites
+            label: Gîtes
+            widget: list
+            allow_add: false
+            summary: "{{fields.name}}"
+            fields:
+              - { name: slug, label: Web address (do not change), widget: string }
+              - { name: name, label: Name, widget: string }
+              - { name: sleeps, label: Sleeps, widget: number }
+              - { name: bedrooms, label: Bedrooms, widget: number }
+              - { name: bathrooms, label: Bathrooms, widget: number }
+              - { name: image, label: Main photo, widget: image }
+              - { name: gallery, label: Gallery, widget: list, field: { name: photo, label: Photo, widget: image } }
+              - { name: video, label: YouTube walk-through link, widget: string, required: false }
+              - name: rates
+                label: Weekly prices (€)
+                widget: object
+                fields:
+                  - { name: winter, label: Winter, widget: number }
+                  - { name: low, label: Low season, widget: number }
+                  - { name: mid, label: Mid season, widget: number }
+                  - { name: high, label: High season, widget: number }
+
+  - name: gite_texts
+    label: Gîtes – texts
+    folder: src/content/gites
+    i18n: true
+    create: false
+    identifier_field: tagline
+    summary: "{{slug}}"
+    fields:
+      - { name: tagline, label: Short description, widget: string, i18n: true }
+      - { name: features, label: Features, widget: list, i18n: true }
+      - { name: body, label: Text, widget: markdown, i18n: true }
+
+  - name: pages
+    label: Pages
+    folder: src/content/pages
+    i18n: true
+    create: false
+    summary: "{{title}}"
+    fields:
+      - { name: title, label: Title, widget: string, i18n: true }
+      - { name: description, label: Introduction, widget: text, required: false, i18n: true }
+      - { name: image, label: Header photo, widget: image, required: false, i18n: duplicate }
+      - { name: heroKicker, label: "Home only – small line above title", widget: string, required: false, i18n: true }
+      - { name: heroTitle, label: "Home only – big title", widget: string, required: false, i18n: true }
+      - { name: heroText, label: "Home only – text on photo", widget: text, required: false, i18n: true }
+      - { name: heroButton, label: "Home only – button", widget: string, required: false, i18n: true }
+      - { name: introTitle, label: "Home only – welcome title", widget: string, required: false, i18n: true }
+      - { name: domaineImage, label: "Home only – domaine photo", widget: image, required: false, i18n: duplicate }
+      - { name: domaineTitle, label: "Home only – domaine title", widget: string, required: false, i18n: true }
+      - { name: domaineText, label: "Home only – domaine text", widget: text, required: false, i18n: true }
+      - { name: themesTitle, label: "Home only – themes title", widget: string, required: false, i18n: true }
+      - { name: themesText, label: "Home only – themes text", widget: text, required: false, i18n: true }
+      - { name: ctaTitle, label: "Home only – closing title", widget: string, required: false, i18n: true }
+      - { name: ctaText, label: "Home only – closing text", widget: text, required: false, i18n: true }
+      - { name: body, label: Text, widget: markdown, i18n: true }
+
+  - name: blog
+    label: Blog / diary
+    folder: src/content/blog
+    i18n: true
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    summary: "{{date}} – {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string, i18n: true }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, i18n: duplicate }
+      - { name: image, label: Photo, widget: image, i18n: duplicate }
+      - { name: excerpt, label: Short summary, widget: text, i18n: true }
+      - { name: video, label: YouTube link (optional), widget: string, required: false, i18n: duplicate }
+      - { name: draft, label: Draft (hide from site), widget: boolean, default: false, required: false, i18n: duplicate }
+      - { name: body, label: Text, widget: markdown, i18n: true }

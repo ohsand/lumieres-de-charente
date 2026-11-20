@@ -1,0 +1,136 @@
+---
+import '../styles/global.css';
+import '../styles/texture.css';
+import { languages, langs, t, type Lang } from '../i18n/ui';
+import { settings, gites, url, getPage, domainePages, img } from '../lib/site';
+interface Props { lang: Lang; title: string; description?: string; path?: string; image?: string }
+const { lang, title, description = '', path = '', image } = Astro.props;
+const s = t(lang);
+const here = Astro.url.pathname;
+const fullTitle = title === settings.siteName ? title : `${title} · ${settings.siteName}`;
+const ogImage = img(image || settings.heroSummer, 1200);
+const isCur = (p: string) => (here === url(lang, p) ? 'page' : undefined);
+---
+<!doctype html>
+<html lang={languages[lang].html} data-season={settings.season === 'winter' ? 'winter' : 'summer'}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href={new URL(here, Astro.site)} />
+  {langs.map((l) => <link rel="alternate" hreflang={languages[l].html} href={new URL(url(l, path), Astro.site)} />)}
+  <link rel="alternate" hreflang="x-default" href={new URL(url('en', path), Astro.site)} />
+  <meta property="og:title" content={fullTitle} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#f7f2e8" />
+  <script is:inline define:vars={{ season: settings.season }}>
+    // Season: set in the CMS ("summer", "winter" or "auto" = Oct–Mar winter). Preview with ?season=winter
+    (function () {
+      var q = new URLSearchParams(location.search).get('season');
+      var s = q || season;
+      if (s === 'auto') { var m = new Date().getMonth(); s = (m >= 9 || m <= 2) ? 'winter' : 'summer'; }
+      document.documentElement.dataset.season = s === 'winter' ? 'winter' : 'summer';
+    })();
+    addEventListener('error', function (e) { if (e.target && e.target.tagName === 'IMG') e.target.style.visibility = 'hidden'; }, true);
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">{s.skip}</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href={url(lang)}><b>Lumières de Charente</b><small>Gîtes · Brettes</small></a>
+      <button class="burger" aria-expanded="false" aria-controls="nav" aria-label={s.menu} data-open={s.menu} data-close={s.close}><span></span><span></span><span></span></button>
+      <nav class="nav" id="nav" aria-label="Main">
+        <ul>
+          <li><a class="top" href={url(lang)} aria-current={isCur('')}>{s.nav_home}</a></li>
+          <li><button class="top" aria-haspopup="true">{s.nav_gites}</button>
+            <ul class="sub">
+              <li><a href={url(lang, 'gites')}>{s.nav_all_gites}</a></li>
+              {gites.map((g) => <li><a href={url(lang, `gites/${g.slug}`)}>Gîte {g.name}</a></li>)}
+            </ul></li>
+          <li><button class="top" aria-haspopup="true">{s.nav_prices_contact}</button>
+            <ul class="sub">
+              <li><a href={url(lang, 'prices')}>{s.nav_prices}</a></li>
+              <li><a href={url(lang, 'contact')}>{s.nav_contact}</a></li>
+            </ul></li>
+          <li><button class="top" aria-haspopup="true">{s.nav_domaine}</button>
+            <ul class="sub">
+              {domainePages.map((p) => <li><a href={url(lang, `domaine/${p}`)}>{getPage(lang, p).frontmatter.title}</a></li>)}
+            </ul></li>
+          <li><a class="top" href={url(lang, 'blog')} aria-current={isCur('blog')}>{s.nav_blog}</a></li>
+        </ul>
+        <div class="langs" aria-label={s.lang_label}>
+          {langs.map((l) => <a href={url(l, path)} hreflang={languages[l].html} lang={languages[l].html} aria-current={l === lang ? 'true' : undefined} title={languages[l].name}>{languages[l].short}</a>)}
+        </div>
+        <a class="btn" href={url(lang, 'contact')}>{s.enquire}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main"><slot /></main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <h4>Lumières de Charente</h4>
+          <p>{s.footer_tag}.</p>
+          <p>{settings.address}</p>
+          <p><a href={`mailto:${settings.email}`}>{settings.email}</a>{settings.phone && <><br /><a href={`tel:${settings.phone.replace(/\s/g, '')}`}>{settings.phone}</a></>}</p>
+        </div>
+        <div>
+          <h4>{s.nav_gites}</h4>
+          <ul>{gites.map((g) => <li><a href={url(lang, `gites/${g.slug}`)}>{g.name}</a></li>)}</ul>
+        </div>
+        <div>
+          <h4>{s.nav_domaine}</h4>
+          <ul>{domainePages.map((p) => <li><a href={url(lang, `domaine/${p}`)}>{getPage(lang, p).frontmatter.title}</a></li>)}</ul>
+        </div>
+        <div>
+          <h4>{s.follow}</h4>
+          <ul>
+            <li><a href={url(lang, 'blog')}>{s.nav_blog}</a></li>
+            {settings.facebook && <li><a href={settings.facebook}>Facebook</a></li>}
+            {settings.instagram && <li><a href={settings.instagram}>Instagram</a></li>}
+            {settings.youtube && <li><a href={settings.youtube}>YouTube</a></li>}
+            <li><a href={url(lang, 'prices')}>{s.nav_prices}</a></li>
+            <li><a href={url(lang, 'contact')}>{s.nav_contact}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="base">
+        <span>© {new Date().getFullYear()} Lumières de Charente · {s.all_rights}</span>
+        <a href={url(lang, 'legal')}>{s.legal}</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const burger = document.querySelector<HTMLButtonElement>('.burger')!;
+    const nav = document.getElementById('nav')!;
+    burger.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? burger.dataset.close! : burger.dataset.open!);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    // Desktop dropdowns: open/close by click or keyboard as well as hover
+    document.querySelectorAll<HTMLButtonElement>('.nav button.top').forEach((b) =>
+      b.addEventListener('click', () => {
+        const li = b.parentElement!;
+        const was = li.classList.contains('open');
+        document.querySelectorAll('.nav li.open').forEach((x) => x.classList.remove('open'));
+        if (!was) li.classList.add('open');
+        b.setAttribute('aria-expanded', String(!was));
+      })
+    );
+    document.addEventListener('click', (e) => {
+      if (!(e.target as Element).closest('.nav li')) document.querySelectorAll('.nav li.open').forEach((x) => x.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>

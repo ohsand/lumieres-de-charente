@@ -1,0 +1,16 @@
+---
+import { languages, type Lang } from '../i18n/ui';
+import { img, url } from '../lib/site';
+interface Props { lang: Lang; p: any; hidden?: boolean }
+const { lang, p, hidden } = Astro.props;
+const fm = p.frontmatter;
+const date = new Date(fm.date).toLocaleDateString(languages[lang].locale, { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<a class="post-card" href={url(lang, `blog/${p.slug}`)} hidden={hidden}>
+  <img class="photo" src={img(fm.image, 900)} alt="" loading="lazy" width="900" height="600" />
+  <div>
+    <time datetime={fm.date}>{date}{fm.video && ' · ▶ Video'}</time>
+    <h2 style="font-size:1.7rem;margin-top:.4rem">{fm.title}</h2>
+    <p>{fm.excerpt}</p>
+  </div>
+</a>

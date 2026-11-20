@@ -1,0 +1,19 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { t, type Lang } from '../../../i18n/ui';
+import { img, url, getPage, domainePages, settings, langPaths } from '../../../lib/site';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+---
+<Base lang={lang} title={s.domaine_title} path="domaine">
+  <section class="page-hero"><img class="photo" src={img(settings.heroSummer, 2000)} alt="" />
+    <div class="wrap inner"><h1>{s.domaine_title}</h1></div></section>
+  <section class="section"><div class="wrap grid g3">
+    {domainePages.map((p) => { const fm = getPage(lang, p).frontmatter; return (
+      <a class="card" href={url(lang, `domaine/${p}`)}>
+        <img class="photo" src={img(fm.image, 900)} alt="" loading="lazy" />
+        <div class="body"><h3>{fm.title}</h3><p>{fm.description}</p><span class="more">{s.read_more} →</span></div>
+      </a>); })}
+  </div></section>
+</Base>

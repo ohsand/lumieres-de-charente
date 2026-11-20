@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import GiteCard from '../../components/GiteCard.astro';
+import PostCard from '../../components/PostCard.astro';
+import { t, type Lang } from '../../i18n/ui';
+import { settings, gites, img, url, getPage, getPosts, langPaths } from '../../lib/site';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+const page = getPage(lang, 'home');
+const fm = page.frontmatter;
+const posts = getPosts(lang).slice(0, 2);
+const themes = getPage(lang, 'themed-holidays').frontmatter;
+---
+<Base lang={lang} title={settings.siteName} description={fm.description}>
+  <section class="hero">
+    <img class="photo summer-only" src={img(settings.heroSummer, 2000)} alt="" fetchpriority="high" />
+    <img class="photo winter-only" src={img(settings.heroWinter, 2000)} alt="" loading="lazy" />
+    <div class="wrap inner">
+      <span class="kicker">{fm.heroKicker}</span>
+      <h1>{fm.heroTitle}</h1>
+      <p>{fm.heroText}</p>
+      <p style="margin-top:1.8rem"><a class="btn light" href={url(lang, 'gites')}>{fm.heroButton}</a></p>
+    </div>
+    <a class="scroll" href="#welcome">{s.scroll}</a>
+  </section>
+
+  <section class="section" id="welcome">
+    <div class="narrow prose" style="text-align:center">
+      <p class="ornament">✦ ✦ ✦</p>
+      <h2>{fm.introTitle}</h2>
+      <div class="lead"><page.Content /></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <span class="kicker">{s.nav_gites}</span>
+      <h2>{s.gites_title}</h2>
+      <p class="lead" style="max-width:60ch">{s.gites_intro}</p>
+      <div class="grid g3" style="margin-top:2.5rem">
+        {gites.map((g) => <GiteCard lang={lang} g={g} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <img class="photo" src={img(fm.domaineImage, 1200)} alt="" loading="lazy" />
+      <div>
+        <span class="kicker">{s.nav_domaine}</span>
+        <h2>{fm.domaineTitle}</h2>
+        <p class="lead">{fm.domaineText}</p>
+        <p><a class="btn ghost" href={url(lang, 'domaine/about')}>{s.discover}</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap split rev">
+      <img class="photo" src={img(themes.image, 1200)} alt="" loading="lazy" />
+      <div>
+        <span class="kicker">{themes.title}</span>
+        <h2>{fm.themesTitle}</h2>
+        <p class="lead">{fm.themesText}</p>
+        <p><a class="btn ghost" href={url(lang, 'domaine/themed-holidays')}>{s.discover}</a></p>
+      </div>
+    </div>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="section">
+      <div class="wrap">
+        <span class="kicker">{s.nav_blog}</span>
+        <h2>{s.blog_title}</h2>
+        <div class="posts" style="margin-top:2rem">{posts.map((p) => <PostCard lang={lang} p={p} />)}</div>
+        <p style="margin-top:2rem"><a class="btn ghost" href={url(lang, 'blog')}>{s.read_more}</a></p>
+      </div>
+    </section>
+  )}
+
+  <section class="section cta-band">
+    <div class="wrap">
+      <h2>{fm.ctaTitle}</h2>
+      <p>{fm.ctaText}</p>
+      <a class="btn light" href={url(lang, 'contact')}>{s.check_availability}</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,18 @@
+---
+import { t, languages, type Lang } from '../i18n/ui';
+import { img, url, money, getGiteText, type Gite } from '../lib/site';
+interface Props { lang: Lang; g: Gite }
+const { lang, g } = Astro.props;
+const s = t(lang);
+const fm = getGiteText(lang, g.slug).frontmatter;
+const from = Math.min(...Object.values(g.rates));
+---
+<a class="card" href={url(lang, `gites/${g.slug}`)}>
+  <img class="photo" src={img(g.image, 900)} alt={`Gîte ${g.name}`} loading="lazy" width="900" height="675" />
+  <div class="body">
+    <h3>Gîte {g.name}</h3>
+    <div class="meta">{s.sleeps} {g.sleeps} · {g.bedrooms} {s.bedrooms.toLowerCase()} · {s.from} {money(from, languages[lang].locale)} {s.per_week}</div>
+    <p>{fm.tagline}</p>
+    <span class="more">{s.view_gite} →</span>
+  </div>
+</a>

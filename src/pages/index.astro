@@ -1,0 +1,17 @@
+---
+// Root: send visitors to their own language (falls back to English).
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><title>Lumières de Charente</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script is:inline>
+  var supported = ['en', 'fr', 'nl', 'de', 'zh'];
+  var pick = 'en';
+  (navigator.languages || [navigator.language]).some(function (l) {
+    var c = (l || '').slice(0, 2).toLowerCase();
+    if (supported.indexOf(c) > -1) { pick = c; return true; }
+  });
+  location.replace('/' + pick + '/' + location.search);
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/en/" /></noscript>
+</head><body><a href="/en/">Lumières de Charente</a></body></html>

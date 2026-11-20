@@ -1,0 +1,21 @@
+---
+import Base from '../../../layouts/Base.astro';
+import GiteCard from '../../../components/GiteCard.astro';
+import { t, type Lang } from '../../../i18n/ui';
+import { gites, settings, img, langPaths } from '../../../lib/site';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+---
+<Base lang={lang} title={s.nav_gites} description={s.gites_intro} path="gites">
+  <section class="page-hero">
+    <img class="photo" src={img(settings.heroSummer, 2000)} alt="" />
+    <div class="wrap inner"><span class="kicker" style="color:#f3dcb4">Lumières de Charente</span><h1>{s.gites_title}</h1></div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <p class="lead" style="max-width:62ch">{s.gites_intro}</p>
+      <div class="grid g3" style="margin-top:2.5rem">{gites.map((g) => <GiteCard lang={lang} g={g} />)}</div>
+    </div>
+  </section>
+</Base>

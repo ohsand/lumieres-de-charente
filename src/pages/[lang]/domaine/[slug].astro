@@ -1,0 +1,26 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { t, langs, type Lang } from '../../../i18n/ui';
+import { img, url, getPage, domainePages } from '../../../lib/site';
+export function getStaticPaths() {
+  return langs.flatMap((lang) => domainePages.map((slug) => ({ params: { lang, slug } })));
+}
+const lang = Astro.params.lang as Lang;
+const slug = Astro.params.slug!;
+const s = t(lang);
+const page = getPage(lang, slug);
+const fm = page.frontmatter;
+const others = domainePages.filter((p) => p !== slug);
+---
+<Base lang={lang} title={fm.title} description={fm.description} path={`domaine/${slug}`} image={fm.image}>
+  <section class="page-hero"><img class="photo" src={img(fm.image, 2000)} alt="" />
+    <div class="wrap inner"><span class="kicker" style="color:#f3dcb4">{s.domaine_title}</span><h1>{fm.title}</h1></div></section>
+  <section class="section"><div class="narrow prose">
+    <p class="lead">{fm.description}</p>
+    <page.Content />
+  </div></section>
+  <section class="section alt"><div class="wrap">
+    <h3>{s.domaine_title}</h3>
+    <p style="display:flex;flex-wrap:wrap;gap:.6rem">{others.map((p) => <a class="btn ghost" href={url(lang, `domaine/${p}`)}>{getPage(lang, p).frontmatter.title}</a>)}</p>
+  </div></section>
+</Base>

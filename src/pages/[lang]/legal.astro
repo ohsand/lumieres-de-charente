@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, type Lang } from '../../i18n/ui';
+import { getPage, langPaths } from '../../lib/site';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const page = getPage(lang, 'legal');
+---
+<Base lang={lang} title={page.frontmatter.title} path="legal">
+  <section class="page-head"><div class="narrow"><h1>{page.frontmatter.title}</h1></div></section>
+  <section style="padding-bottom:5rem"><div class="narrow prose"><page.Content /></div></section>
+</Base>

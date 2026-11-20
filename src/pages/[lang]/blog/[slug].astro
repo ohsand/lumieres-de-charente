@@ -1,0 +1,37 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { t, langs, languages, type Lang } from '../../../i18n/ui';
+import { img, url, getPosts, youtubeId } from '../../../lib/site';
+export function getStaticPaths() {
+  return langs.flatMap((lang) => getPosts(lang).map((p) => ({ params: { lang, slug: p.slug } })));
+}
+const lang = Astro.params.lang as Lang;
+const s = t(lang);
+const post = getPosts(lang).find((p) => p.slug === Astro.params.slug)!;
+const fm = post.frontmatter;
+const yt = youtubeId(fm.video);
+const date = new Date(fm.date).toLocaleDateString(languages[lang].locale, { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base lang={lang} title={fm.title} description={fm.excerpt} path={`blog/${post.slug}`} image={fm.image}>
+  <article class="post">
+    <section class="page-head"><div class="narrow">
+      <time datetime={fm.date}>{s.posted} {date}</time>
+      <h1 style="margin-top:.6rem">{fm.title}</h1>
+      <p class="lead">{fm.excerpt}</p>
+    </div></section>
+    <div class="wrap"><img class="photo" src={img(fm.image, 2000)} alt="" style="width:100%;max-height:70vh" /></div>
+    <section class="section"><div class="narrow prose">
+      {yt && <div class="video" data-yt={yt} style="margin-bottom:2rem"><button class="btn light" type="button">▶ {s.play_video}</button></div>}
+      <post.Content />
+      <hr class="rule" />
+      <a href={url(lang, 'blog')}>← {s.back_blog}</a>
+    </div></section>
+  </article>
+  <script>
+    document.querySelectorAll<HTMLElement>('.video[data-yt]').forEach((v) => {
+      v.querySelector('button')?.addEventListener('click', () => {
+        v.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v.dataset.yt}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen title="Video"></iframe>`;
+      });
+    });
+  </script>
+</Base>
