@@ -7,7 +7,9 @@ Static multilingual site (EN · FR · NL · DE · 繁中) built with Astro, host
 - `src/data/prices.json` – season dates
 - `src/content/{gites,pages,blog}/<lang>/` – all texts, one folder per language
 - `src/i18n/ui.ts` – menu, buttons and form labels
-- `/admin/` – Decap CMS editing screen (needs GitHub repo + GitHub login helper; set `repo` in `public/admin/config.yml`)
+- `/admin/` – Decap CMS editing screen with a simple password login (no GitHub account needed).
+  Vercel environment variables: `ADMIN_PASSWORD` (comma-separate several) and `GITHUB_REPO_TOKEN`
+  (fine-grained GitHub token, only this repository, Contents: read & write). Changing either takes effect after a redeploy.
 
 Preview the winter look on any page with `?season=winter`.
 
