@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Themed holidays
 description: A week with a theme – brocante, cognac, cycling, wellbeing or a cosy winter by the fire.
-image: jim:i747c61735a6abbff/1516531560
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i747c61735a6abbff/version/1516531560/image.jpg
 ---
 Want more than a pool and a deckchair? Choose one of our themes and we will prepare routes, addresses and reservations for you.
 

@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: 周邊地區
 description: 向日葵、葡萄園、羅馬式教堂與熱鬧市集——最真實的夏朗德。
-image: jim:i03c3ef49d16cf9b0/1516268368
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i03c3ef49d16cf9b0/version/1516268368/image.jpg
 ---
 夏朗德北部保留著昔日的法國鄉村風貌：起伏的農田、向日葵與麥田、寧靜的小路，以及有教堂、麵包店和咖啡館的小村莊。這裡的生活隨著季節與市集而流轉。
 

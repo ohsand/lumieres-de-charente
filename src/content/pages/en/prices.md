@@ -1,4 +1,5 @@
 ---
+kind: prices
 title: Prices
 ---
 ## Included in the price

@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Wat te doen
 description: Kanoën op de Charente, brocantemarkten en uitjes met kinderen – er is genoeg te doen, of juist niets.
-image: jim:i13b51fdc39e86633/1516267761
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i13b51fdc39e86633/version/1516267761/image.jpg
 ---
 ## Buiten
 - Kanoën en zwemmen in de Charente en de meren in de buurt

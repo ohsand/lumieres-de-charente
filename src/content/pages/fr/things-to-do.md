@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Que faire
 description: Canoë sur la Charente, brocantes et sorties en famille – il y a beaucoup à faire, ou rien du tout.
-image: jim:i13b51fdc39e86633/1516267761
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i13b51fdc39e86633/version/1516267761/image.jpg
 ---
 ## En plein air
 - Canoë et baignade dans la Charente et les lacs des environs

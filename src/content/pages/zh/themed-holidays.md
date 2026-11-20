@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: 主題假期
 description: 一週的主題假期——古董、干邑、單車、養生，或爐火旁的溫暖冬日。
-image: jim:i747c61735a6abbff/1516531560
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i747c61735a6abbff/version/1516531560/image.jpg
 ---
 不只想要泳池和躺椅？選擇我們的主題之一，我們會為您準備路線、推薦與預訂。
 

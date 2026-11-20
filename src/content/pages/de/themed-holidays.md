@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Themenurlaub
 description: Eine Woche mit Thema – Brocante, Cognac, Radfahren, Wellness oder ein gemütlicher Winter am Kamin.
-image: jim:i747c61735a6abbff/1516531560
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i747c61735a6abbff/version/1516531560/image.jpg
 ---
 Lust auf mehr als Pool und Liegestuhl? Wählen Sie eines unserer Themen, und wir bereiten Routen, Adressen und Reservierungen vor.
 

@@ -1,4 +1,5 @@
 ---
+kind: prices
 title: Tarifs
 ---
 ## Compris dans le prix

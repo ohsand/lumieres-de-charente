@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Themavakanties
 description: Een week met een thema – brocante, cognac, fietsen, wellness of een knusse winter bij de haard.
-image: jim:i747c61735a6abbff/1516531560
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i747c61735a6abbff/version/1516531560/image.jpg
 ---
 Meer zin in dan een zwembad en een ligstoel? Kies een van onze thema's en wij bereiden routes, adressen en reserveringen voor.
 

@@ -1,7 +1,7 @@
 ---
 title: 歡迎來到 Lumières de Charente
 date: 2026-11-18
-image: jim:i85d73519caae00fc/1517173201
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i85d73519caae00fc/version/1517173201/image.jpg
 excerpt: Gîtes de Brettes 有了新名字、新網站和大計畫。這個冬天將發生的事。
 video: ""
 ---

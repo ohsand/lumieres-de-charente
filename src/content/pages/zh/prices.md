@@ -1,4 +1,5 @@
 ---
+kind: prices
 title: 價格
 ---
 ## 價格包含

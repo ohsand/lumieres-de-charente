@@ -1,7 +1,7 @@
 ---
 title: "Journal des travaux n° 1 : avant la poussière"
 date: 2026-11-05
-image: jim:ie478644ddf998f6c/1516208952
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie478644ddf998f6c/version/1516208952/image.jpg
 excerpt: Les derniers hôtes sont partis, la piscine est couverte et les artisans arrivent. Coup d'œil sur les plans.
 video: ""
 ---

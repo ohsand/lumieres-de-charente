@@ -1,7 +1,7 @@
 ---
 title: "Verbouwdagboek #1: voor het stof"
 date: 2026-11-05
-image: jim:ie478644ddf998f6c/1516208952
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie478644ddf998f6c/version/1516208952/image.jpg
 excerpt: De laatste gasten zijn vertrokken, het zwembad is afgedekt en de aannemers komen eraan. Een blik op de plannen.
 video: ""
 ---

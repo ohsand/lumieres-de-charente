@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Location
 description: In the north of the Charente, close to Ruffec – easy to reach from the UK, the Netherlands, Belgium and Germany.
-image: jim:i711caf9244a6647f/1516617820
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i711caf9244a6647f/version/1516617820/image.jpg
 ---
 The domaine lies on the edge of Brettes, a small village of stone houses about 11 km from Ruffec, in the north of the Charente department (Nouvelle-Aquitaine). It is one of the sunniest parts of western France.
 

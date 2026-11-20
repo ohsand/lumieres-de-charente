@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Séjours à thème
 description: Une semaine à thème – brocante, cognac, vélo, bien-être ou un hiver douillet au coin du feu.
-image: jim:i747c61735a6abbff/1516531560
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i747c61735a6abbff/version/1516531560/image.jpg
 ---
 Envie de plus qu'une piscine et un transat ? Choisissez l'un de nos thèmes : nous préparons itinéraires, adresses et réservations.
 

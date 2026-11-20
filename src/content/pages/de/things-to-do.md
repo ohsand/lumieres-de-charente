@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Aktivitäten
 description: Kanufahren auf der Charente, Brocante-Märkte und Familienausflüge – es gibt viel zu tun, oder auch gar nichts.
-image: jim:i13b51fdc39e86633/1516267761
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i13b51fdc39e86633/version/1516267761/image.jpg
 ---
 ## Draußen
 - Kanufahren und Baden in der Charente und den Seen der Umgebung

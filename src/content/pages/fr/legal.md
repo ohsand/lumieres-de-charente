@@ -1,4 +1,5 @@
 ---
+kind: legal
 title: Mentions légales & confidentialité
 ---
 ## Éditeur

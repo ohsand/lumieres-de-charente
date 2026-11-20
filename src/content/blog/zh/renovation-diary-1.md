@@ -1,7 +1,7 @@
 ---
 title: "翻修日誌 #1：塵土飛揚之前"
 date: 2026-11-05
-image: jim:ie478644ddf998f6c/1516208952
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie478644ddf998f6c/version/1516208952/image.jpg
 excerpt: 最後一批旅客已離開，泳池已覆蓋，工班即將進場。一起看看我們的計畫。
 video: ""
 ---

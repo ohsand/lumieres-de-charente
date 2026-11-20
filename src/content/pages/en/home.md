@@ -1,4 +1,5 @@
 ---
+kind: home
 title: Home
 description: Five French gîtes with two pools and a large garden in Brettes, Charente. Brocante charm, quiet countryside, open all year.
 heroKicker: Brettes · Charente · France
@@ -6,7 +7,7 @@ heroTitle: The quiet light of the Charente
 heroText: Five characterful gîtes, two pools and a large garden on the edge of a sleepy French village. Come for a week, stay for the light.
 heroButton: Discover the gîtes
 introTitle: Bienvenue
-domaineImage: jim:ie2fa528ef0e07e31/1672824626
+domaineImage: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie2fa528ef0e07e31/version/1672824626/image.jpg
 domaineTitle: Old stone, slow days
 domaineText: Our 18th and 19th-century farm buildings sit in two walled acres between sunflower fields and farmland. Long lunches under the trees, a swim before dinner, a market on Saturday – that is the rhythm here.
 themesTitle: A holiday with a theme

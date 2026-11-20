@@ -1,4 +1,5 @@
 ---
+kind: legal
 title: Legal notice & privacy
 ---
 ## Publisher

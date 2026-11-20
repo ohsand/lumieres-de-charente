@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Die Umgebung
 description: Sonnenblumen, Weinberge, romanische Kirchen und lebhafte Märkte – die echte Charente.
-image: jim:i03c3ef49d16cf9b0/1516268368
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i03c3ef49d16cf9b0/version/1516268368/image.jpg
 ---
 Der Norden der Charente ist das ländliche Frankreich von früher: sanfte Felder, Sonnenblumen und Weizen, stille Landstraßen und Dörfer mit Kirche, Bäckerei und Café. Das Leben folgt hier den Jahreszeiten und den Märkten.
 

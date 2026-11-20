@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Qui sommes-nous
 description: Mathieu et Yann ont échangé la vie citadine contre le rythme paisible de la Charente – et une ferme pleine de gîtes.
-image: jim:i410d46b889e5138e/1787565925
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i410d46b889e5138e/version/1787565925/image.jpg
 ---
 Nous sommes Mathieu et Yann. Nous avons tous deux mené des carrières dans d'autres domaines et vécu longtemps dans de grandes villes. La Charente a d'abord été une destination de vacances, puis l'endroit où l'on revenait sans cesse – et enfin, notre maison. Comme beaucoup, nous rêvions d'abord de Provence, mais la vie plus calme et plus lente d'ici nous convient bien mieux.
 

@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: 休閒活動
 description: 在夏朗德河划獨木舟、逛古董市集、親子出遊——可以很忙，也可以什麼都不做。
-image: jim:i13b51fdc39e86633/1516267761
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i13b51fdc39e86633/version/1516267761/image.jpg
 ---
 ## 戶外活動
 - 在夏朗德河與附近湖泊划獨木舟、游泳

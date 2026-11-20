@@ -1,4 +1,5 @@
 ---
+kind: home
 title: 首頁
 description: 位於法國夏朗德省 Brettes 的五間度假屋，設有兩座泳池與大花園。古董市集風格、寧靜田園，全年開放。
 heroKicker: Brettes · 夏朗德 · 法國
@@ -6,7 +7,7 @@ heroTitle: 夏朗德的溫柔光影
 heroText: 五間別具特色的度假屋、兩座泳池和一座大花園，坐落在寧靜的法國小村邊。為一週假期而來，為這片光影而留。
 heroButton: 探索度假屋
 introTitle: Bienvenue · 歡迎
-domaineImage: jim:ie2fa528ef0e07e31/1672824626
+domaineImage: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie2fa528ef0e07e31/version/1672824626/image.jpg
 domaineTitle: 古老石屋，慢活時光
 domaineText: 我們的 18 與 19 世紀農舍建築，位於近一公頃的圍牆莊園內，四周是向日葵田與農地。樹下悠長的午餐、晚餐前的一次游泳、週六的市集——這就是這裡的節奏。
 themesTitle: 主題假期

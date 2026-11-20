@@ -1,4 +1,5 @@
 ---
+kind: home
 title: Home
 description: Vijf Franse gîtes met twee zwembaden en een grote tuin in Brettes, Charente. Brocante-sfeer, rustig platteland, het hele jaar open.
 heroKicker: Brettes · Charente · Frankrijk
@@ -6,7 +7,7 @@ heroTitle: Het zachte licht van de Charente
 heroText: Vijf sfeervolle gîtes, twee zwembaden en een grote tuin aan de rand van een rustig Frans dorp. Kom voor een week, blijf voor het licht.
 heroButton: Ontdek de gîtes
 introTitle: Bienvenue
-domaineImage: jim:ie2fa528ef0e07e31/1672824626
+domaineImage: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie2fa528ef0e07e31/version/1672824626/image.jpg
 domaineTitle: Oude stenen, trage dagen
 domaineText: Onze boerderijgebouwen uit de 18e en 19e eeuw liggen op een ommuurd terrein van bijna een hectare, tussen zonnebloemvelden en akkers. Lange lunches onder de bomen, een duik voor het diner, zaterdag naar de markt – dat is hier het ritme.
 themesTitle: Vakantie met een thema

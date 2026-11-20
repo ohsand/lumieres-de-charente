@@ -1,7 +1,7 @@
 ---
 title: "Bautagebuch Nr. 1: vor dem Staub"
 date: 2026-11-05
-image: jim:ie478644ddf998f6c/1516208952
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie478644ddf998f6c/version/1516208952/image.jpg
 excerpt: Die letzten Gäste sind abgereist, der Pool ist abgedeckt und die Handwerker kommen. Ein Blick auf die Pläne.
 video: ""
 ---

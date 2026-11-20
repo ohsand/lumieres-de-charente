@@ -1,4 +1,5 @@
 ---
+kind: home
 title: Accueil
 description: Cinq gîtes de charme avec deux piscines et un grand jardin à Brettes, en Charente. Esprit brocante, campagne paisible, ouvert toute l'année.
 heroKicker: Brettes · Charente · France
@@ -6,7 +7,7 @@ heroTitle: La douce lumière de la Charente
 heroText: Cinq gîtes de caractère, deux piscines et un grand jardin aux portes d'un paisible village charentais. Venez pour une semaine, restez pour la lumière.
 heroButton: Découvrir les gîtes
 introTitle: Bienvenue
-domaineImage: jim:ie2fa528ef0e07e31/1672824626
+domaineImage: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie2fa528ef0e07e31/version/1672824626/image.jpg
 domaineTitle: Vieilles pierres, journées lentes
 domaineText: "Nos bâtiments de ferme des XVIIIe et XIXe siècles se trouvent sur un terrain clos de près d'un hectare, entre champs de tournesols et terres agricoles. Longs déjeuners sous les arbres, une baignade avant le dîner, le marché le samedi : voilà le rythme d'ici."
 themesTitle: Des vacances à thème

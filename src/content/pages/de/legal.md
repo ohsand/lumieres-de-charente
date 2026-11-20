@@ -1,4 +1,5 @@
 ---
+kind: legal
 title: Impressum & Datenschutz
 ---
 ## Anbieter

@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Ligging
 description: In het noorden van de Charente, vlak bij Ruffec – goed bereikbaar vanuit Nederland, België, Duitsland en het VK.
-image: jim:i711caf9244a6647f/1516617820
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i711caf9244a6647f/version/1516617820/image.jpg
 ---
 Het domein ligt aan de rand van Brettes, een klein dorp met stenen huizen op zo'n 11 km van Ruffec, in het noorden van het departement Charente (Nouvelle-Aquitaine). Het is een van de zonnigste streken van West-Frankrijk.
 

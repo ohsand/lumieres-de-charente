@@ -1,11 +1,20 @@
 # Decap CMS – the owners' editing screen at /admin/
 # Login: password page at /api/auth (Vercel env vars ADMIN_PASSWORD + GITHUB_REPO_TOKEN, see README).
+# Sections are ordered like the website menu. Every field says where it appears on the site.
 backend:
   name: github
   repo: ohsand/lumieres-de-charente
   branch: main
   base_url: https://lumieres-de-charente.vercel.app   # password login runs on this site (api/auth.js)
   auth_endpoint: api/auth
+  commit_messages:
+    create: "Admin: new {{collection}} “{{slug}}”"
+    update: "Admin: edit {{collection}} “{{slug}}”"
+    delete: "Admin: delete {{collection}} “{{slug}}”"
+    uploadMedia: "Admin: upload photo {{path}}"
+    deleteMedia: "Admin: delete photo {{path}}"
+site_url: https://lumieres-de-charente.vercel.app
+display_url: https://lumieres-de-charente.vercel.app
 media_folder: public/images/uploads
 public_folder: /images/uploads
 locale: en
@@ -15,114 +24,210 @@ i18n:
   default_locale: en
 
 collections:
-  - name: settings
-    label: "⚙︎ Settings (season, contact)"
-    files:
-      - name: settings
-        label: Site settings
-        file: src/data/settings.json
-        fields:
-          - { name: siteName, label: Site name, widget: string }
-          - { name: season, label: "Season look (auto = winter from October to March)", widget: select, options: [auto, summer, winter] }
-          - { name: heroSummer, label: Home photo – summer, widget: image }
-          - { name: heroWinter, label: Home photo – winter, widget: image }
-          - { name: email, label: Email, widget: string }
-          - { name: phone, label: Telephone, widget: string, required: false }
-          - { name: whatsapp, label: WhatsApp, widget: string, required: false }
-          - { name: address, label: Address, widget: string }
-          - { name: lat, label: Map latitude, widget: number, value_type: float }
-          - { name: lon, label: Map longitude, widget: number, value_type: float }
-          - { name: facebook, label: Facebook URL, widget: string, required: false }
-          - { name: instagram, label: Instagram URL, widget: string, required: false }
-          - { name: youtube, label: YouTube URL, widget: string, required: false }
-      - name: prices
-        label: Seasons & dates
-        file: src/data/prices.json
-        fields:
-          - { name: year, label: Year, widget: number }
-          - name: seasons
-            label: Seasons
-            widget: list
-            allow_add: false
-            fields:
-              - { name: id, label: "Season (winter / low / mid / high)", widget: string }
-              - { name: dates, label: Dates, widget: string }
-      - name: gites
-        label: "Gîtes – photos, beds & weekly prices"
-        file: src/data/gites.json
-        fields:
-          - name: gites
-            label: Gîtes
-            widget: list
-            allow_add: false
-            summary: "{{fields.name}}"
-            fields:
-              - { name: slug, label: Web address (do not change), widget: string }
-              - { name: name, label: Name, widget: string }
-              - { name: sleeps, label: Sleeps, widget: number }
-              - { name: bedrooms, label: Bedrooms, widget: number }
-              - { name: bathrooms, label: Bathrooms, widget: number }
-              - { name: image, label: Main photo, widget: image }
-              - { name: gallery, label: Gallery, widget: list, field: { name: photo, label: Photo, widget: image } }
-              - { name: video, label: YouTube walk-through link, widget: string, required: false }
-              - name: rates
-                label: Weekly prices (€)
-                widget: object
-                fields:
-                  - { name: winter, label: Winter, widget: number }
-                  - { name: low, label: Low season, widget: number }
-                  - { name: mid, label: Mid season, widget: number }
-                  - { name: high, label: High season, widget: number }
+  # ───────────────────────── 1. HOME PAGE ─────────────────────────
+  - name: home
+    label: "1 · Home page"
+    label_singular: "Home page"
+    description: "The first page visitors see: the big photo with its title, the welcome text, and the short sections further down. The gîte cards and the latest diary posts fill in automatically."
+    folder: src/content/pages
+    filter: { field: kind, value: home }
+    identifier_field: kind
+    i18n: true
+    create: false
+    delete: false
+    summary: "Home page"
+    preview_path: "en/"
+    fields:
+      - { name: kind, widget: hidden, default: home, i18n: duplicate }
+      - { name: title, widget: hidden, default: Home, i18n: true }
+      - { name: description, label: "Google description", widget: text, required: false, i18n: true, hint: "Not shown on the page. This is the short text Google shows under the site name in search results (about 155 characters)." }
+      - { name: heroKicker, label: "Big photo – small line above the title", widget: string, required: false, i18n: true, hint: "The small capital letters at the top, e.g. “Brettes · Charente · France”." }
+      - { name: heroTitle, label: "Big photo – main title", widget: string, i18n: true, hint: "The large title written over the photo when the site opens." }
+      - { name: heroText, label: "Big photo – text under the title", widget: text, i18n: true, hint: "One or two sentences written over the photo." }
+      - { name: heroButton, label: "Big photo – button text", widget: string, i18n: true, hint: "The light button on the photo. It always leads to the gîtes page." }
+      - { name: introTitle, label: "Welcome – title", widget: string, i18n: true, hint: "The centred title just below the big photo." }
+      - { name: body, label: "Welcome – text", widget: markdown, i18n: true, buttons: [bold, italic, link], editor_components: [], hint: "The centred welcome paragraph just below the big photo." }
+      - { name: domaineImage, label: "“The Domaine” section – photo", widget: image, i18n: duplicate, choose_url: true, hint: "The photo on the left of the “Old stone, slow days” section, about halfway down." }
+      - { name: domaineTitle, label: "“The Domaine” section – title", widget: string, i18n: true }
+      - { name: domaineText, label: "“The Domaine” section – text", widget: text, i18n: true }
+      - { name: themesTitle, label: "“Themed holidays” section – title", widget: string, i18n: true, hint: "The photo for this section is the one on the Themed holidays page (section 5)." }
+      - { name: themesText, label: "“Themed holidays” section – text", widget: text, i18n: true }
+      - { name: ctaTitle, label: "Coloured band at the bottom – title", widget: string, i18n: true, hint: "The coloured band just above the footer, with the “Check availability” button." }
+      - { name: ctaText, label: "Coloured band at the bottom – text", widget: text, i18n: true }
 
+  # ───────────────────────── 2. THE GÎTES ─────────────────────────
   - name: gite_texts
-    label: Gîtes – texts
+    label: "2 · The gîtes – descriptions"
+    label_singular: "Gîte description"
+    description: "The written description of each gîte, shown on its own page (menu “The Gîtes” → the gîte). Beds, photos and prices are in section 3."
     folder: src/content/gites
     i18n: true
     create: false
+    delete: false
     identifier_field: tagline
-    summary: "{{slug}}"
+    summary: "Gîte {{filename}} – {{tagline}}"
+    preview_path: "en/gites/{{filename}}/"
     fields:
-      - { name: tagline, label: Short description, widget: string, i18n: true }
-      - { name: features, label: Features, widget: list, i18n: true }
-      - { name: body, label: Text, widget: markdown, i18n: true }
+      - { name: tagline, label: "Short description", widget: string, i18n: true, hint: "One line. Shown under the gîte name on its card, at the top of its page, and in the price table." }
+      - { name: features, label: "“At a glance” list", widget: list, i18n: true, field: { name: feature, label: Feature, widget: string }, hint: "The bullet points on the right of the gîte page, e.g. “Two shower rooms”. Use + Add to add a line." }
+      - { name: body, label: "Main description", widget: markdown, i18n: true, buttons: [bold, italic, link, heading-two, bulleted-list], hint: "The text on the left of the gîte page, under the big photo." }
 
-  - name: pages
-    label: Pages
+  - name: gites
+    label: "3 · The gîtes – photos, beds & prices"
+    description: "For each gîte: the photos, number of beds/bedrooms/bathrooms, the video tour and the weekly price per season. These are the same in every language."
+    i18n: false
+    delete: false
+    files:
+      - name: gites
+        label: "Photos, beds & prices of all five gîtes"
+        file: src/data/gites.json
+        preview_path: "en/gites/"
+        fields:
+          - name: gites
+            label: "Gîtes"
+            label_singular: "gîte"
+            widget: list
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            collapsed: true
+            summary: "Gîte {{fields.name}} – sleeps {{fields.sleeps}}"
+            fields:
+              - { name: slug, widget: hidden }
+              - { name: name, label: "Name", widget: string, hint: "Shown as “Gîte …” everywhere on the site." }
+              - { name: sleeps, label: "Number of beds (sleeps)", widget: number, value_type: int, min: 1 }
+              - { name: bedrooms, label: "Bedrooms", widget: number, value_type: int, min: 0 }
+              - { name: bathrooms, label: "Bathrooms / shower rooms", widget: number, value_type: int, min: 0 }
+              - { name: image, label: "Main photo", widget: image, choose_url: true, hint: "Used on the gîte’s card and as the big photo at the top of its page." }
+              - { name: gallery, label: "Photo gallery", widget: list, field: { name: photo, label: Photo, widget: image, choose_url: true }, hint: "The “Photo gallery” on the gîte page. The first photo is shown large. Drag to change the order." }
+              - { name: video, label: "Video tour (YouTube link)", widget: string, required: false, hint: "Paste a YouTube link, e.g. https://youtu.be/…  Leave empty to show “video coming soon”." }
+              - name: rates
+                label: "Weekly prices in € (shown in the price table)"
+                widget: object
+                collapsed: false
+                fields:
+                  - { name: winter, label: "Winter", widget: number, value_type: int }
+                  - { name: low, label: "Low season", widget: number, value_type: int }
+                  - { name: mid, label: "Mid season", widget: number, value_type: int }
+                  - { name: high, label: "High season", widget: number, value_type: int }
+
+  # ───────────────────────── 4. PRICES ─────────────────────────
+  - name: seasons
+    label: "4a · Prices – season dates"
+    description: "The dates of each season, shown at the top of the price table (menu “Prices & Contact” → “Prices & availability”). The prices themselves are in section 3."
+    i18n: false
+    delete: false
+    files:
+      - name: prices
+        label: "Season dates"
+        file: src/data/prices.json
+        preview_path: "en/prices/"
+        fields:
+          - { name: year, label: "Year shown in the page title", widget: number, value_type: int }
+          - name: seasons
+            label: "Seasons"
+            widget: list
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            summary: "{{fields.id}} season: {{fields.dates}}"
+            fields:
+              - { name: id, widget: hidden }
+              - { name: dates, label: "Dates", widget: string, hint: "Day/month. Separate two periods with “ · ”, e.g. 27/03 – 14/05 · 02/10 – 29/10" }
+
+  - name: prices_text
+    label: "4b · Prices – what’s included & good to know"
+    description: "The text below the price table: what is included, arrival times, deposit and so on."
     folder: src/content/pages
+    filter: { field: kind, value: prices }
+    identifier_field: kind
     i18n: true
     create: false
-    summary: "{{title}}"
+    delete: false
+    summary: "Text below the price table"
+    preview_path: "en/prices/"
     fields:
-      - { name: title, label: Title, widget: string, i18n: true }
-      - { name: description, label: Introduction, widget: text, required: false, i18n: true }
-      - { name: image, label: Header photo, widget: image, required: false, i18n: duplicate }
-      - { name: heroKicker, label: "Home only – small line above title", widget: string, required: false, i18n: true }
-      - { name: heroTitle, label: "Home only – big title", widget: string, required: false, i18n: true }
-      - { name: heroText, label: "Home only – text on photo", widget: text, required: false, i18n: true }
-      - { name: heroButton, label: "Home only – button", widget: string, required: false, i18n: true }
-      - { name: introTitle, label: "Home only – welcome title", widget: string, required: false, i18n: true }
-      - { name: domaineImage, label: "Home only – domaine photo", widget: image, required: false, i18n: duplicate }
-      - { name: domaineTitle, label: "Home only – domaine title", widget: string, required: false, i18n: true }
-      - { name: domaineText, label: "Home only – domaine text", widget: text, required: false, i18n: true }
-      - { name: themesTitle, label: "Home only – themes title", widget: string, required: false, i18n: true }
-      - { name: themesText, label: "Home only – themes text", widget: text, required: false, i18n: true }
-      - { name: ctaTitle, label: "Home only – closing title", widget: string, required: false, i18n: true }
-      - { name: ctaText, label: "Home only – closing text", widget: text, required: false, i18n: true }
-      - { name: body, label: Text, widget: markdown, i18n: true }
+      - { name: kind, widget: hidden, default: prices, i18n: duplicate }
+      - { name: title, widget: hidden, default: Prices, i18n: true }
+      - { name: body, label: "Text below the price table", widget: markdown, i18n: true, buttons: [bold, italic, link, heading-two, bulleted-list], hint: "Use “Heading 2” for the small titles (e.g. “Included in the price”) and bullet lists for the points." }
 
+  # ───────────────────────── 5. THE DOMAINE ─────────────────────────
+  - name: domaine
+    label: "5 · The Domaine pages"
+    label_singular: "Domaine page"
+    description: "The five pages under the menu “The Domaine”: About us, Location, The area, Things to do and Themed holidays."
+    folder: src/content/pages
+    filter: { field: kind, value: domaine }
+    i18n: true
+    create: false
+    delete: false
+    summary: "{{title}}"
+    preview_path: "en/domaine/{{filename}}/"
+    fields:
+      - { name: kind, widget: hidden, default: domaine, i18n: duplicate }
+      - { name: title, label: "Page title", widget: string, i18n: true, hint: "Shown on the photo at the top of the page, and in the menu." }
+      - { name: description, label: "Introduction", widget: text, i18n: true, hint: "The first, slightly larger paragraph of the page. Also used on the page’s card and by Google." }
+      - { name: image, label: "Photo at the top of the page", widget: image, i18n: duplicate, choose_url: true }
+      - { name: body, label: "Page text", widget: markdown, i18n: true, buttons: [bold, italic, link, heading-two, heading-three, bulleted-list, numbered-list, quote], hint: "Everything below the introduction." }
+
+  # ───────────────────────── 6. BLOG ─────────────────────────
   - name: blog
-    label: Blog / diary
+    label: "6 · Diary / blog"
+    label_singular: "diary post"
+    description: "The posts on the “Blog” page, newest first. The two newest also appear on the home page. Click “New diary post” to write one."
     folder: src/content/blog
     i18n: true
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     summary: "{{date}} – {{title}}"
     sortable_fields: [date, title]
+    preview_path: "en/blog/{{filename}}/"
     fields:
-      - { name: title, label: Title, widget: string, i18n: true }
-      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, i18n: duplicate }
-      - { name: image, label: Photo, widget: image, i18n: duplicate }
-      - { name: excerpt, label: Short summary, widget: text, i18n: true }
-      - { name: video, label: YouTube link (optional), widget: string, required: false, i18n: duplicate }
-      - { name: draft, label: Draft (hide from site), widget: boolean, default: false, required: false, i18n: duplicate }
-      - { name: body, label: Text, widget: markdown, i18n: true }
+      - { name: title, label: "Title", widget: string, i18n: true }
+      - { name: date, label: "Date", widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, picker_utc: true, i18n: duplicate, hint: "Posts are sorted by this date, newest first." }
+      - { name: image, label: "Photo", widget: image, i18n: duplicate, choose_url: true, hint: "Shown next to the post in the list and at the top of the post." }
+      - { name: excerpt, label: "Short summary", widget: text, i18n: true, hint: "One or two sentences shown in the list of posts." }
+      - { name: video, label: "YouTube video (optional)", widget: string, required: false, i18n: duplicate, hint: "Paste a YouTube link to show the video at the top of the post." }
+      - { name: draft, label: "Hide this post (draft)", widget: boolean, default: false, required: false, i18n: duplicate, hint: "Switch on to keep the post off the website while you work on it." }
+      - { name: body, label: "Text", widget: markdown, i18n: true }
+
+  # ───────────────────────── 7. SETTINGS ─────────────────────────
+  - name: settings
+    label: "7 · Settings – contact, social media & season look"
+    description: "Contact details (footer and contact page), social media links (footer), and whether the site uses its summer or winter look."
+    i18n: false
+    delete: false
+    files:
+      - name: settings
+        label: "Site settings"
+        file: src/data/settings.json
+        preview_path: "en/contact/"
+        fields:
+          - { name: siteName, widget: hidden }
+          - { name: season, label: "Season look", widget: select, options: [{ label: "Automatic (winter look from October to March)", value: auto }, { label: "Always summer (light colours)", value: summer }, { label: "Always winter (warm colours)", value: winter }], hint: "Winter uses warmer colours and the winter photo on the home page." }
+          - { name: heroSummer, label: "Home page photo – summer look", widget: image, choose_url: true, hint: "The big photo when the site opens, in the summer look. Use a wide, landscape photo." }
+          - { name: heroWinter, label: "Home page photo – winter look", widget: image, choose_url: true }
+          - { name: email, label: "Email address", widget: string, hint: "Enquiries from the contact form are sent here. Also shown in the footer." }
+          - { name: phone, label: "Telephone (optional)", widget: string, required: false, hint: "Leave empty to hide. Write it as people should dial it, e.g. +33 6 12 34 56 78" }
+          - { name: whatsapp, widget: hidden }
+          - { name: address, label: "Address", widget: string, hint: "Shown in the footer and on the contact page." }
+          - { name: facebook, label: "Facebook page link", widget: string, required: false, hint: "Full link starting with https:// – leave empty to hide." }
+          - { name: instagram, label: "Instagram link", widget: string, required: false }
+          - { name: youtube, label: "YouTube channel link", widget: string, required: false }
+          - { name: lat, label: "Map position – latitude", widget: number, value_type: float, hint: "Only change this if the pin on the contact-page map is in the wrong place." }
+          - { name: lon, label: "Map position – longitude", widget: number, value_type: float }
+
+  - name: legal
+    label: "8 · Legal notice & privacy"
+    description: "The legal page linked at the very bottom of every page (company number, host, privacy)."
+    folder: src/content/pages
+    filter: { field: kind, value: legal }
+    i18n: true
+    create: false
+    delete: false
+    summary: "{{title}}"
+    preview_path: "en/legal/"
+    fields:
+      - { name: kind, widget: hidden, default: legal, i18n: duplicate }
+      - { name: title, label: "Title", widget: string, i18n: true }
+      - { name: body, label: "Text", widget: markdown, i18n: true }

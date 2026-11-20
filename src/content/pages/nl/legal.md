@@ -1,4 +1,5 @@
 ---
+kind: legal
 title: Juridische informatie & privacy
 ---
 ## Uitgever

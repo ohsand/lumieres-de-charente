@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: 交通位置
 description: 位於夏朗德北部、Ruffec 附近，交通便利。
-image: jim:i711caf9244a6647f/1516617820
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i711caf9244a6647f/version/1516617820/image.jpg
 ---
 莊園位於 Brettes 村邊緣，這是一座石屋小村，距離 Ruffec 約 11 公里，位於夏朗德省北部（新阿基坦大區），是法國西部日照最充足的地區之一。
 

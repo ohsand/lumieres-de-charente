@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Things to do
 description: From canoeing on the Charente to brocante markets and family days out – there is plenty to do, or nothing at all.
-image: jim:i13b51fdc39e86633/1516267761
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i13b51fdc39e86633/version/1516267761/image.jpg
 ---
 ## Outdoors
 - Canoeing and swimming in the River Charente and local lakes

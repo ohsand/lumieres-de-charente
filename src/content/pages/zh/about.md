@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: 關於我們
 description: Mathieu 與 Yann 告別城市生活，來到夏朗德過慢步調的日子——還有一座滿是度假屋的農莊。
-image: jim:i410d46b889e5138e/1787565925
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i410d46b889e5138e/version/1787565925/image.jpg
 ---
 我們是 Mathieu 和 Yann。我們過去都在其他領域工作，並在大城市生活多年。夏朗德起初只是度假地，後來成為我們一再回來的地方——最終成了我們的家。和許多人一樣，我們最初嚮往普羅旺斯，但發現這裡更寧靜、更緩慢的生活更適合我們。
 

@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Over ons
 description: Mathieu en Yann ruilden het stadsleven in voor het rustige tempo van de Charente – en een boerderij vol gîtes.
-image: jim:i410d46b889e5138e/1787565925
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i410d46b889e5138e/version/1787565925/image.jpg
 ---
 Wij zijn Mathieu en Yann. We hadden allebei een loopbaan in een ander vak en woonden jarenlang in grote steden. De Charente was eerst een vakantiebestemming, daarna de plek waar we steeds weer terugkwamen – en uiteindelijk ons thuis. Zoals zovelen droomden we eerst van de Provence, maar het rustigere, tragere leven hier past veel beter bij ons.
 

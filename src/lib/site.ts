@@ -12,6 +12,8 @@ const PATH = 'path/sb76bf8a295bc40bd';
 /** Resolve an image reference: "jim:id/version" (current site's photos), an uploaded "/images/..." path, or a full URL. */
 export function img(ref: string, w = 1600): string {
   if (!ref) return '';
+  // Photos still hosted on the old site: request them at the size this spot needs.
+  if (ref.startsWith(JIM)) return ref.replace(/dimension=\d+x10000/, `dimension=${w}x10000`);
   const m = ref.match(/^(jim|jimbg):([^/]+)\/(\d+)$/);
   if (!m) return ref;
   const kind = m[1] === 'jimbg' ? 'backgroundarea' : 'image';

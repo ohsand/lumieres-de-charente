@@ -1,4 +1,5 @@
 ---
+kind: home
 title: Startseite
 description: Fünf französische Gîtes mit zwei Pools und großem Garten in Brettes, Charente. Brocante-Charme, ruhiges Land, ganzjährig geöffnet.
 heroKicker: Brettes · Charente · Frankreich
@@ -6,7 +7,7 @@ heroTitle: Das sanfte Licht der Charente
 heroText: Fünf charaktervolle Gîtes, zwei Pools und ein großer Garten am Rand eines verschlafenen französischen Dorfes. Kommen Sie für eine Woche, bleiben Sie für das Licht.
 heroButton: Die Gîtes entdecken
 introTitle: Bienvenue
-domaineImage: jim:ie2fa528ef0e07e31/1672824626
+domaineImage: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/ie2fa528ef0e07e31/version/1672824626/image.jpg
 domaineTitle: Alte Steine, langsame Tage
 domaineText: Unsere Bauernhofgebäude aus dem 18. und 19. Jahrhundert liegen auf einem ummauerten Grundstück von knapp einem Hektar zwischen Sonnenblumenfeldern und Ackerland. Lange Mittagessen unter Bäumen, ein Bad vor dem Abendessen, samstags auf den Markt – das ist hier der Rhythmus.
 themesTitle: Urlaub mit Thema

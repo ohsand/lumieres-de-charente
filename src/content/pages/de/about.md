@@ -1,7 +1,8 @@
 ---
+kind: domaine
 title: Über uns
 description: Mathieu und Yann haben das Stadtleben gegen das ruhige Tempo der Charente getauscht – und gegen einen Hof voller Gîtes.
-image: jim:i410d46b889e5138e/1787565925
+image: https://image.jimcdn.com/app/cms/image/transf/dimension=1600x10000:format=jpg/path/sb76bf8a295bc40bd/image/i410d46b889e5138e/version/1787565925/image.jpg
 ---
 Wir sind Mathieu und Yann. Wir hatten beide Berufe in ganz anderen Bereichen und lebten viele Jahre in Großstädten. Die Charente war zuerst ein Urlaubsziel, dann der Ort, an den wir immer wieder zurückkehrten – und schließlich unser Zuhause. Wie viele träumten wir zuerst von der Provence, doch das ruhigere, langsamere Leben hier passt viel besser zu uns.
 

@@ -1,4 +1,5 @@
 ---
+kind: prices
 title: Preise
 ---
 ## Im Preis inbegriffen

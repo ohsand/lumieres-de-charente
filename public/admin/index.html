@@ -1,14 +1,55 @@
 <!doctype html>
 <html><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="noindex" /><title>Lumières de Charente – Admin</title></head>
+<meta name="robots" content="noindex" /><title>Lumières de Charente – Admin</title>
+<style>
+  /* Small comfort tweaks for the editing screen */
+  [class*='CollectionTopDescription'] { font-size: 15px; line-height: 1.5; }
+  [class*='FieldLabel'] { font-size: 14px !important; }
+</style>
+</head>
 <body>
 <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
 <script>
-  // Login uses a password, not a GitHub account: relabel Decap's login button.
+  // 1. Login uses a password, not a GitHub account: relabel Decap's login button.
   new MutationObserver(function () {
     document.querySelectorAll('button').forEach(function (b) {
       if (/GitHub/.test(b.textContent)) b.textContent = 'Se connecter / Log in';
     });
   }).observe(document.body, { childList: true, subtree: true });
+
+  // 2. Right-hand pane: show the real page of the website that this entry belongs to,
+  //    so it is always clear what is being edited.
+  var SITE = 'https://lumieres-de-charente.vercel.app';
+  var pages = {
+    home:        function () { return '/en/'; },
+    gite_texts:  function (s) { return '/en/gites/' + s + '/'; },
+    gites:       function () { return '/en/gites/'; },
+    prices:      function () { return '/en/prices/'; },
+    prices_text: function () { return '/en/prices/'; },
+    domaine:     function (s) { return '/en/domaine/' + s + '/'; },
+    blog:        function (s) { return '/en/blog/' + s + '/'; },
+    settings:    function () { return '/en/contact/'; },
+    legal:       function () { return '/en/legal/'; }
+  };
+  Object.keys(pages).forEach(function (name) {
+    CMS.registerPreviewTemplate(name, createClass({
+      render: function () {
+        var slug = this.props.entry.get('slug') || '';
+        var isNew = this.props.entry.get('newRecord');
+        var url = SITE + pages[name](slug);
+        var note = isNew
+          ? 'This is a new post: it will appear on the website about a minute after you click “Publish”.'
+          : 'This is the page you are editing, as it is on the website now. Your changes appear here about a minute after you click “Publish”.';
+        return h('div', { style: { fontFamily: 'Arial, sans-serif', height: '100%', display: 'flex', flexDirection: 'column' } },
+          h('div', { style: { background: '#2a2723', color: '#f7f2e8', padding: '12px 16px', fontSize: '14px', lineHeight: '1.45' } },
+            h('strong', {}, '👁 On the website: '),
+            h('a', { href: url, target: '_blank', rel: 'noopener', style: { color: '#f3dcb4' } }, url.replace('https://', '')),
+            h('div', { style: { opacity: 0.85, marginTop: '4px' } }, note)
+          ),
+          isNew ? null : h('iframe', { src: url, title: 'Website page', style: { flex: '1', width: '100%', minHeight: '85vh', border: '0' } })
+        );
+      }
+    }));
+  });
 </script>
 </body></html>
